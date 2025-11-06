@@ -1,0 +1,6 @@
+{
+  "app_id": "your_app_id_here",
+  "secret": "your_secret_here",
+  "api_base_url": "http://ips.chataudit.net"
+}
+
