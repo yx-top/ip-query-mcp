@@ -6,9 +6,25 @@ Model Context Protocol (MCP) server for IP query service, installable via npm.
 
 ## Installation
 
+### Global Installation
+
 ```bash
 npm install -g ip-query-mcp
 ```
+
+### Using npx (No Installation Required)
+
+You can also use it directly with npx without installing:
+
+```bash
+npx --yes ip-query-mcp
+```
+
+## Package Information
+
+- **npm Package**: [ip-query-mcp](https://www.npmjs.com/package/ip-query-mcp)
+- **Version**: 1.0.0
+- **License**: MIT
 
 ## Quick Start
 
@@ -71,12 +87,32 @@ Edit the configuration file (location varies by system):
 **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`  
 **Linux**: `~/.config/Claude/claude_desktop_config.json`
 
+**Option 1: Using global installation**
+
 ```json
 {
   "mcpServers": {
     "ip-query": {
       "command": "ip-query-mcp",
       "args": [],
+      "env": {
+        "MCP_APP_ID": "your_app_id",
+        "MCP_SECRET": "your_secret",
+        "MCP_API_BASE_URL": "http://ips.chataudit.net"
+      }
+    }
+  }
+}
+```
+
+**Option 2: Using npx (recommended)**
+
+```json
+{
+  "mcpServers": {
+    "ip-query": {
+      "command": "npx",
+      "args": ["--yes", "ip-query-mcp"],
       "env": {
         "MCP_APP_ID": "your_app_id",
         "MCP_SECRET": "your_secret",
@@ -101,7 +137,57 @@ If using the configuration file method, you can simplify to:
 
 #### Cursor
 
-Add MCP server configuration in Cursor settings, using the same format as Claude Desktop.
+Edit the MCP configuration file (usually located at `~/.cursor/mcp.json` on Windows, or `~/.config/Cursor/mcp.json` on Linux/macOS):
+
+**Windows**: `%USERPROFILE%\.cursor\mcp.json`  
+**macOS/Linux**: `~/.config/Cursor/mcp.json`
+
+```json
+{
+  "mcpServers": {
+    "ip-query": {
+      "command": "cmd",
+      "args": ["/c", "npx", "--yes", "ip-query-mcp"],
+      "env": {
+        "MCP_APP_ID": "your_app_id",
+        "MCP_SECRET": "your_secret",
+        "MCP_API_BASE_URL": "http://ips.chataudit.net"
+      }
+    }
+  }
+}
+```
+
+**Note for Windows users**: Use `cmd` with `/c` and `npx` to run the package. For Linux/macOS, you can use:
+
+```json
+{
+  "mcpServers": {
+    "ip-query": {
+      "command": "npx",
+      "args": ["--yes", "ip-query-mcp"],
+      "env": {
+        "MCP_APP_ID": "your_app_id",
+        "MCP_SECRET": "your_secret",
+        "MCP_API_BASE_URL": "http://ips.chataudit.net"
+      }
+    }
+  }
+}
+```
+
+If using the configuration file method, you can simplify to:
+
+```json
+{
+  "mcpServers": {
+    "ip-query": {
+      "command": "cmd",
+      "args": ["/c", "npx", "--yes", "ip-query-mcp"]
+    }
+  }
+}
+```
 
 ### 3. Usage
 

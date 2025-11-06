@@ -6,9 +6,25 @@ IP 查询服务的 Model Context Protocol (MCP) 服务器，可通过 npm 安装
 
 ## 安装
 
+### 全局安装
+
 ```bash
 npm install -g ip-query-mcp
 ```
+
+### 使用 npx（无需安装）
+
+您也可以直接使用 npx 运行，无需安装：
+
+```bash
+npx --yes ip-query-mcp
+```
+
+## 包信息
+
+- **npm 包**: [ip-query-mcp](https://www.npmjs.com/package/ip-query-mcp)
+- **版本**: 1.0.0
+- **许可证**: MIT
 
 ## 快速开始
 
@@ -71,12 +87,32 @@ export MCP_API_BASE_URL=http://ips.chataudit.net
 **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`  
 **Linux**: `~/.config/Claude/claude_desktop_config.json`
 
+**方式一：使用全局安装**
+
 ```json
 {
   "mcpServers": {
     "ip-query": {
       "command": "ip-query-mcp",
       "args": [],
+      "env": {
+        "MCP_APP_ID": "your_app_id",
+        "MCP_SECRET": "your_secret",
+        "MCP_API_BASE_URL": "http://ips.chataudit.net"
+      }
+    }
+  }
+}
+```
+
+**方式二：使用 npx（推荐）**
+
+```json
+{
+  "mcpServers": {
+    "ip-query": {
+      "command": "npx",
+      "args": ["--yes", "ip-query-mcp"],
       "env": {
         "MCP_APP_ID": "your_app_id",
         "MCP_SECRET": "your_secret",
@@ -101,7 +137,57 @@ export MCP_API_BASE_URL=http://ips.chataudit.net
 
 #### Cursor
 
-在 Cursor 设置中添加 MCP 服务器配置，格式与 Claude Desktop 相同。
+编辑 MCP 配置文件（通常位于 Windows 的 `~/.cursor/mcp.json`，或 Linux/macOS 的 `~/.config/Cursor/mcp.json`）：
+
+**Windows**: `%USERPROFILE%\.cursor\mcp.json`  
+**macOS/Linux**: `~/.config/Cursor/mcp.json`
+
+```json
+{
+  "mcpServers": {
+    "ip-query": {
+      "command": "cmd",
+      "args": ["/c", "npx", "--yes", "ip-query-mcp"],
+      "env": {
+        "MCP_APP_ID": "your_app_id",
+        "MCP_SECRET": "your_secret",
+        "MCP_API_BASE_URL": "http://ips.chataudit.net"
+      }
+    }
+  }
+}
+```
+
+**Windows 用户注意**: 使用 `cmd` 配合 `/c` 和 `npx` 来运行包。Linux/macOS 用户可以使用：
+
+```json
+{
+  "mcpServers": {
+    "ip-query": {
+      "command": "npx",
+      "args": ["--yes", "ip-query-mcp"],
+      "env": {
+        "MCP_APP_ID": "your_app_id",
+        "MCP_SECRET": "your_secret",
+        "MCP_API_BASE_URL": "http://ips.chataudit.net"
+      }
+    }
+  }
+}
+```
+
+如果使用配置文件方式，可以简化为：
+
+```json
+{
+  "mcpServers": {
+    "ip-query": {
+      "command": "cmd",
+      "args": ["/c", "npx", "--yes", "ip-query-mcp"]
+    }
+  }
+}
+```
 
 ### 3. 使用
 
